@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 """Graficas de las Partes B y C.
 
-  python3 -m lab4_rl.plot_parte_bc --b results/parte_b --c results/parte_c --out results/figs_bc
+  python3 -m lab4_rl.plots.parte_bc --b results/parte_b --c results/parte_c --out results/graficas
 
-(3) fig3_intervencion_colision.png : tasa de intervencion y de colision por ronda (BC -> DAgger)
-(4) fig4_trayectorias_bc_vs_dagger.png : mapa 2D (x, y) de /odom, BC vs DAgger (mismos inicios)
-(5) fig5_bradley_terry.png : curva L_RM (train/val) + tabla de exito con ruido LiDAR
-    fig6_rlhf_entrenamiento.png : r_psi y KL durante el ajuste PPO para cada beta
-    fig7_suavidad.png : w(t) DAgger vs RLHF (beta>0 y beta=0)
-    tabla_estres.md
+(3) 3_parteB_intervencion_y_colision.png : tasa de intervencion y de colision por ronda (BC -> DAgger)
+(4) 4_parteB_trayectorias_bc_vs_dagger.png : mapa 2D (x, y) de /odom, BC vs DAgger (mismos inicios)
+(5) 5_parteC_bradley_terry_y_estres.png : curva L_RM (train/val) + tabla de exito con ruido LiDAR
+    extra_parteC_rlhf_entrenamiento.png : r_psi y KL durante el ajuste PPO para cada beta
+    extra_parteC_suavidad_w.png : w(t) DAgger vs RLHF (beta>0 y beta=0)
+    5_parteC_tabla_estres.md
 """
 import argparse
 import csv
@@ -72,7 +72,7 @@ def fig3(bdir, out):
     ax.grid(alpha=0.3)
     ax.legend(fontsize=8, loc='upper right')
     fig.tight_layout()
-    fig.savefig(os.path.join(out, 'fig3_intervencion_colision.png'), dpi=150)
+    fig.savefig(os.path.join(out, '3_parteB_intervencion_y_colision.png'), dpi=150)
     plt.close(fig)
 
 
@@ -102,7 +102,7 @@ def fig4(bdir, out):
     fig.suptitle('Parte B - Trayectorias (x, y) de /odom con perturbaciones iniciales '
                  '(mismos 15 inicios; verde=meta, rojo=choque, naranja=desvio/timeout)', fontsize=10)
     fig.tight_layout()
-    fig.savefig(os.path.join(out, 'fig4_trayectorias_bc_vs_dagger.png'), dpi=150)
+    fig.savefig(os.path.join(out, '4_parteB_trayectorias_bc_vs_dagger.png'), dpi=150)
     plt.close(fig)
 
 
@@ -155,7 +155,7 @@ def fig5(cdir, out):
         ax.set_title(f'Success rate en {rows[0]["episodes"]} episodios (entre parentesis: choques)',
                      fontsize=10)
     fig.tight_layout()
-    fig.savefig(os.path.join(out, 'fig5_bradley_terry.png'), dpi=150)
+    fig.savefig(os.path.join(out, '5_parteC_bradley_terry_y_estres.png'), dpi=150)
     plt.close(fig)
 
     if rows:
@@ -167,7 +167,7 @@ def fig5(cdir, out):
             lines.append(f'| {s["label"]} | ' + ' | '.join(
                 f'{100 * s["results"][n]["success_rate"]:.0f}% ({100 * s["results"][n]["collision_rate"]:.0f}%)'
                 for n in noises) + f' | {s["results"][noises[0]]["mean_abs_dw"]:.2f} |')
-        with open(os.path.join(out, 'tabla_estres.md'), 'w') as f:
+        with open(os.path.join(out, '5_parteC_tabla_estres.md'), 'w') as f:
             f.write('\n'.join(lines) + '\n')
         print('\n'.join(lines))
 
@@ -198,7 +198,7 @@ def fig6(cdir, out):
         a.legend(fontsize=8)
     fig.suptitle('Parte C - Ajuste PPO con R_RLHF = r_psi - beta ln(pi_theta/pi_DAgger)')
     fig.tight_layout()
-    fig.savefig(os.path.join(out, 'fig6_rlhf_entrenamiento.png'), dpi=150)
+    fig.savefig(os.path.join(out, 'extra_parteC_rlhf_entrenamiento.png'), dpi=150)
     plt.close(fig)
 
 
@@ -222,7 +222,7 @@ def fig7(cdir, out):
     ax.grid(alpha=0.3)
     ax.legend(fontsize=8)
     fig.tight_layout()
-    fig.savefig(os.path.join(out, 'fig7_suavidad.png'), dpi=150)
+    fig.savefig(os.path.join(out, 'extra_parteC_suavidad_w.png'), dpi=150)
     plt.close(fig)
 
 
@@ -230,7 +230,7 @@ def main():
     p = argparse.ArgumentParser()
     p.add_argument('--b', default='results/parte_b')
     p.add_argument('--c', default='results/parte_c')
-    p.add_argument('--out', default='results/figs_bc')
+    p.add_argument('--out', default='results/graficas')
     args = p.parse_args()
     os.makedirs(args.out, exist_ok=True)
     if os.path.exists(os.path.join(args.b, 'rounds.csv')):

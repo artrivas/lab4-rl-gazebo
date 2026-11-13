@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """Graficas de la Parte A (A2C vs PPO).
 
-  python3 -m lab4_rl.plot_parte_a --runs results/parte_a --evals results/parte_a/eval --out results/parte_a/figs
+  python3 -m lab4_rl.plots.parte_a --runs results/parte_a --evals A2C=... PPO=... --out results/graficas
 
-(1) fig1_recompensa_a2c_vs_ppo.png : retorno por episodio (media movil 20) y tasa de exito vs pasos
-(2) fig2_perfil_v_w.png            : v(t) y w(t) en un episodio de prueba (A2C vs PPO)
-(3) fig3_trayectorias.png          : trayectorias (x, y) de evaluacion sobre el mapa
+(1) 1_parteA_recompensa_a2c_vs_ppo.png : retorno por episodio (media movil 20) y tasa de exito vs pasos
+(2) 2_parteA_perfil_v_w.png            : v(t) y w(t) en un episodio de prueba (A2C vs PPO)
+    extra_parteA_trayectorias_a2c_vs_ppo.png : trayectorias (x, y) de evaluacion sobre el mapa
 """
 import argparse
 import csv
@@ -78,7 +78,7 @@ def fig_rewards(runs_dir, out_dir):
         a.legend(fontsize=8)
     fig.suptitle('Parte A - A2C vs PPO (actor Gaussiano, control continuo v, w)', fontsize=12)
     fig.tight_layout()
-    fig.savefig(os.path.join(out_dir, 'fig1_recompensa_a2c_vs_ppo.png'), dpi=150)
+    fig.savefig(os.path.join(out_dir, '1_parteA_recompensa_a2c_vs_ppo.png'), dpi=150)
     plt.close(fig)
     return table
 
@@ -117,7 +117,7 @@ def fig_velocities(evals, out_dir):
         a.grid(alpha=0.3)
         a.legend(fontsize=8)
     fig.tight_layout()
-    fig.savefig(os.path.join(out_dir, 'fig2_perfil_v_w.png'), dpi=150)
+    fig.savefig(os.path.join(out_dir, '2_parteA_perfil_v_w.png'), dpi=150)
     plt.close(fig)
 
 
@@ -150,7 +150,7 @@ def fig_trajectories(evals, out_dir):
     fig.suptitle('Trayectorias de evaluacion (verde=meta, rojo=choque, naranja=timeout; '
                  'gris: banda de orbita de los cilindros)', fontsize=10)
     fig.tight_layout()
-    fig.savefig(os.path.join(out_dir, 'fig3_trayectorias.png'), dpi=150)
+    fig.savefig(os.path.join(out_dir, 'extra_parteA_trayectorias_a2c_vs_ppo.png'), dpi=150)
     plt.close(fig)
 
 
@@ -159,11 +159,11 @@ def main():
     p.add_argument('--runs', default='results/parte_a')
     p.add_argument('--evals', nargs='*', default=[],
                    help='pares LABEL=prefix, p.ej. "PPO=results/parte_a/eval/ppo"')
-    p.add_argument('--out', default='results/parte_a/figs')
+    p.add_argument('--out', default='results/graficas')
     args = p.parse_args()
     os.makedirs(args.out, exist_ok=True)
     table = fig_rewards(args.runs, args.out)
-    with open(os.path.join(args.out, 'training_summary.json'), 'w') as f:
+    with open(os.path.join(args.runs, 'training_summary.json'), 'w') as f:
         json.dump(table, f, indent=2)
     for t in table:
         print(t)

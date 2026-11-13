@@ -23,6 +23,6 @@ python3 -m lab4_rl.select_best --evals results/parte_a/eval --out results/actor_
   | tee results/parte_a/eval/seleccion.txt
 BEST_A2C=$(python3 -c "import json;print(json.load(open('results/actor_base.json'))['best_per_algo']['a2c'])")
 BEST_PPO=$(python3 -c "import json;print(json.load(open('results/actor_base.json'))['best_per_algo']['ppo'])")
-python3 -m lab4_rl.plot_parte_a --runs results/parte_a --out results/parte_a/figs \
+python3 -m lab4_rl.plots.parte_a --runs results/parte_a --out results/graficas \
   --evals "A2C ($BEST_A2C)=results/parte_a/eval/$BEST_A2C" "PPO ($BEST_PPO)=results/parte_a/eval/$BEST_PPO"
 echo "PARTE A EVAL DONE"

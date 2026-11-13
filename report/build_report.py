@@ -41,7 +41,7 @@ for f in sorted(glob.glob(os.path.join(R, 'parte_a', 'eval', '*_summary.json')))
     eval_a.append([('<b>' + name + ' → actor_base.pth</b>') if name == 'a2c_s1_best' else name,
                    pct(s['success_rate']), pct(s['collision_rate']), pct(s['timeout_rate']),
                    f'{s["mean_return"]:.1f}', '–' if t is None else f'{t:.1f}'])
-train_a = json.load(open(os.path.join(R, 'parte_a', 'figs', 'training_summary.json')))
+train_a = json.load(open(os.path.join(R, 'parte_a', 'training_summary.json')))
 train_rows = [[t['run'], t['episodes'], f'{t["ret_last50"]:.1f} ± {t["ret_last50_std"]:.1f}',
                pct(t['success_last50']), pct(t['collision_last50']), f'{t["best_ma20"]:.1f}']
               for t in train_a]
@@ -79,7 +79,7 @@ figcaption{font-size:9pt;color:#444;margin-top:2px} .eq{background:#f5f7fa;borde
 padding:6px 10px;margin:6px 0;font-family:Cambria,'Times New Roman',serif;font-size:11pt}
 code{background:#f1f1f1;padding:0 3px;border-radius:3px;font-size:9pt} .note{background:#fff8e1;
 border-left:3px solid #f0a500;padding:6px 10px;margin:8px 0} .pb{page-break-before:always}
-ul{margin:4px 0 4px 18px;padding:0} li{margin:2px 0} .missing{color:#b00}
+ul{margin:4px 0 4px 18px;padding:0} li{margin:2px 0} .missing{color:#b00} .links{background:#eef4fb;border-left:3px solid #0b5394;padding:6px 10px;margin:6px 0 10px;font-size:9.5pt;word-break:break-all} a{color:#0b5394}
 @page{size:A4;margin:16mm 14mm}
 """
 
@@ -88,6 +88,8 @@ html = f"""<!doctype html><html lang="es"><head><meta charset="utf-8">
 
 <h1>Práctica de Laboratorio 4: RL en Gazebo</h1>
 <p class="sub">DS5345 Aprendizaje por Refuerzo · 2026-II · TurtleBot3 burger · ROS 2 Humble · Gazebo 11 · PyTorch 2.5</p>
+<div class="links"><b>Código fuente:</b> <a href="https://github.com/artrivas/lab4-rl-gazebo">https://github.com/artrivas/lab4-rl-gazebo</a><br>
+<b>Videos (evidencia Fase 1 y Fase 2):</b> <a href="https://drive.google.com/drive/folders/1dMslm1XBuKaOEY9_Ot0jMoJNVFFXcuxt?usp=sharing">https://drive.google.com/drive/folders/1dMslm1XBuKaOEY9_Ot0jMoJNVFFXcuxt?usp=sharing</a></div>
 
 <p><b>Misión:</b> navegar hasta una <b>meta fija (1.75, 1.75)</b> evadiendo 4 cilindros (r = 0.15 m) que orbitan el
 origen con radio √2 m y periodo 40 s (≈ 0.22 m/s, la misma velocidad máxima del robot), en el mundo
@@ -138,12 +140,12 @@ Adam lr 3·10⁻⁴, γ = 0.99, clip de gradiente 0.5, c<sub>v</sub> = 0.5, c<su
      '−E[min(r<sub>t</sub>Â, clip(r<sub>t</sub>, 1−ε, 1+ε)Â)], r<sub>t</sub> = π<sub>θ</sub>/π<sub>θold</sub>, <b>ε = 0.2</b>'],
     ['actualización', '1 paso de gradiente por rollout (~4 700 en total)', '10 épocas × minibatch 64 (~146 rollouts)']])}
 <p>Mismo entorno, red, recompensa y presupuesto (150 000 pasos ≈ 8.3 h simuladas), 2 semillas por algoritmo, 4 Gazebos en paralelo.</p>
-{img('parte_a/figs/fig1_recompensa_a2c_vs_ppo.png', caption='Gráfica (1): recompensa acumulada por episodio (media móvil 20) vs episodios y vs pasos, y tasa de éxito.')}
+{img('graficas/1_parteA_recompensa_a2c_vs_ppo.png', caption='Gráfica (1): recompensa acumulada por episodio (media móvil 20) vs episodios y vs pasos, y tasa de éxito.')}
 {table(['corrida', 'episodios', 'retorno últimos 50 (media ± desv.)', 'éxito últimos 50', 'choque últimos 50', 'mejor media móvil 20'], train_rows)}
 <p><b>Evaluación</b> (20 episodios, política determinista = media del actor):</p>
 {table(['actor', 'éxito', 'choque', 'timeout', 'retorno medio', 't medio a meta (s)'], eval_a)}
-{img('parte_a/figs/fig2_perfil_v_w.png', width='80%', caption='Gráfica (2): perfil temporal v(t), ω(t) en un episodio de prueba.')}
-{img('parte_a/figs/fig3_trayectorias.png', width='62%', caption='Trayectorias de evaluación (complementaria).')}
+{img('graficas/2_parteA_perfil_v_w.png', width='80%', caption='Gráfica (2): perfil temporal v(t), ω(t) en un episodio de prueba.')}
+{img('graficas/extra_parteA_trayectorias_a2c_vs_ppo.png', width='62%', caption='Trayectorias de evaluación (complementaria).')}
 <h3>Análisis</h3>
 <ul>
 <li><b>A2C</b> aprende a cruzar el anillo desde ~15k pasos y llega a 40–60 % de éxito estocástico y <b>70 %</b> determinista
@@ -176,8 +178,8 @@ D ← D ∪ D<sub>i</sub> y se hace <i>fine-tuning in situ</i> (simulación en p
 final <code>dagger_sim.pth</code>. Cada política se evalúa además sin ayuda en los mismos 15 inicios perturbados.</li>
 </ul>
 {table(['política', '|D|', 'pares nuevos', 'tasa de intervención', 'choques con supervisión', 'éxito sin supervisión', 'choque sin supervisión'], round_rows)}
-{img('figs_bc/fig3_intervencion_colision.png', width='80%', caption='Gráfica (3): tasa de intervención humana y tasa de colisión por ronda de DAgger (ronda 0 = BC).')}
-{img('figs_bc/fig4_trayectorias_bc_vs_dagger.png', width='92%', caption='Gráfica (4): mapa 2D de trayectorias (x, y) de /odom, BC vs DAgger, mismos 15 inicios perturbados.')}
+{img('graficas/3_parteB_intervencion_y_colision.png', width='80%', caption='Gráfica (3): tasa de intervención humana y tasa de colisión por ronda de DAgger (ronda 0 = BC).')}
+{img('graficas/4_parteB_trayectorias_bc_vs_dagger.png', width='92%', caption='Gráfica (4): mapa 2D de trayectorias (x, y) de /odom, BC vs DAgger, mismos 15 inicios perturbados.')}
 <h3>Análisis</h3>
 <ul>
 <li><b>Distribution shift:</b> BC imita muy bien al experto en su distribución (MSE 0.005) pero con rumbos iniciales
@@ -204,23 +206,25 @@ R<sub>RLHF</sub>(s, a) = r<sub>ψ</sub>(s, a) − β · ln[ π<sub>θ</sub>(a|s)
 <p>r<sub>ψ</sub>: MLP (28+2)→128→128→1, Adam con weight decay, 16 pares de entrenamiento / 4 de validación, normalizada
 (media 0, desv. 1). Ajuste final con PPO (ε = 0.2, rollouts de 512, 5 épocas, lr 10⁻⁴, σ inicial 0.1 para π<sub>θ</sub> y π<sub>DAgger</sub>) partiendo de π<sub>DAgger</sub>
 (referencia congelada), 40 000 pasos para β = 0, 0.2 y 1.0. <code>{rm_log}</code></p>
-{img('figs_bc/fig5_bradley_terry.png', caption='Gráfica (5): curva de pérdida ℒ<sub>RM</sub> de Bradley-Terry y tabla de éxito con ruido Gaussiano en el LiDAR.')}
+{img('graficas/5_parteC_bradley_terry_y_estres.png', caption='Gráfica (5): curva de pérdida ℒ<sub>RM</sub> de Bradley-Terry y tabla de éxito con ruido Gaussiano en el LiDAR.')}
 <p><b>Prueba de estrés</b> – Success Rate en 10 episodios (mismos inicios perturbados), entre paréntesis la tasa de choque:</p>
 {table(['política'] + [f'σ<sub>LiDAR</sub> = {n} m' for n in noises] + ['media |Δω| sin ruido (rad/s)'], stress_rows)}
-{img('figs_bc/fig6_rlhf_entrenamiento.png', caption='Gráfica (6, complementaria): ajuste PPO – recompensa aprendida, divergencia con π<sub>DAgger</sub> y éxito para cada β.')}
-{img('figs_bc/fig7_suavidad.png', width='85%', caption='Gráfica (7, complementaria): ω(t) en un episodio de prueba, DAgger vs RLHF.')}
+{img('graficas/extra_parteC_rlhf_entrenamiento.png', caption='Gráfica (6, complementaria): ajuste PPO – recompensa aprendida, divergencia con π<sub>DAgger</sub> y éxito para cada β.')}
+{img('graficas/extra_parteC_suavidad_w.png', width='85%', caption='Gráfica (7, complementaria): ω(t) en un episodio de prueba, DAgger vs RLHF.')}
 {analysis_c}
 
-<h2>6. Reproducibilidad y entregables</h2>
+<h2>6. Entregables y reproducibilidad</h2>
 <ul>
-<li>Código: <code>lab4_rl/</code> (<code>env.py</code> entorno continuo ROS 2 + gymnasium, <code>agents.py</code> actor/crítico/A2C/PPO,
-<code>train.py</code>, <code>expert.py</code>, <code>parte_b.py</code>, <code>parte_c.py</code>, <code>stress.py</code>, gráficas),
-<code>launch/lab4_world.launch.py</code>, <code>worlds/lab4_stage3.world.in</code>, <code>scripts/</code>.</li>
-<li>Pesos: <code>results/actor_base.pth</code>, <code>results/parte_b/bc.pth</code>, <code>results/parte_b/dagger_sim.pth</code>,
+<li><b>Repositorio:</b> <a href="https://github.com/artrivas/lab4-rl-gazebo">https://github.com/artrivas/lab4-rl-gazebo</a> — entorno ROS 2 + gymnasium (<code>lab4_rl/env.py</code>), redes y
+algoritmos en PyTorch (<code>agents.py</code>, <code>expert.py</code>, <code>parte_b.py</code>, <code>parte_c.py</code>),
+launch y mundo de Gazebo (<code>launch/</code>, <code>worlds/</code>), scripts de ejecución (<code>scripts/</code>) y resultados
+(<code>results/</code>, gráficas en <code>results/graficas/</code>).</li>
+<li><b>Videos:</b> <a href="https://drive.google.com/drive/folders/1dMslm1XBuKaOEY9_Ot0jMoJNVFFXcuxt?usp=sharing">https://drive.google.com/drive/folders/1dMslm1XBuKaOEY9_Ot0jMoJNVFFXcuxt?usp=sharing</a></li>
+<li><b>Pesos:</b> <code>results/actor_base.pth</code>, <code>results/parte_b/bc.pth</code>, <code>results/parte_b/dagger_sim.pth</code>,
 <code>results/parte_c/reward_model.pth</code>, <code>results/parte_c/rlhf_beta*/actor_rlhf.pth</code>.</li>
-<li>Comandos: <code>scripts/train_parte_a.sh</code>, <code>scripts/eval_parte_a.sh</code>,
-<code>scripts/run_sim.sh 61 log python3 -m lab4_rl.parte_b</code>, <code>scripts/parte_c.sh</code>;
-video: <code>scripts/video_fase1.sh</code> y <code>scripts/video_fase2.sh</code> (Gazebo con GUI en tiempo real).</li>
+<li><b>Comandos:</b> <code>scripts/parte_a_train.sh</code>, <code>scripts/parte_a_eval.sh</code>, <code>scripts/parte_b.sh</code>,
+<code>scripts/parte_c.sh</code>; video: <code>scripts/video_fase1.sh</code> y <code>scripts/video_fase2.sh</code>
+(Gazebo con GUI en tiempo real).</li>
 </ul>
 </body></html>"""
 

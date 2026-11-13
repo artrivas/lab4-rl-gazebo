@@ -35,5 +35,5 @@ for spec in "BC=results/parte_b/bc.pth" "DAgger=$DAG" "RLHF_beta0=$C/rlhf_beta0/
 done
 wait
 
-python3 -m lab4_rl.plot_parte_bc --b results/parte_b --c $C --out results/figs_bc
+python3 -m lab4_rl.plots.parte_bc --b results/parte_b --c $C --out results/graficas
 echo "PARTE C DONE"

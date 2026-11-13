@@ -1,6 +1,6 @@
 #!/bin/bash
 # Parte A: entrena A2C y PPO (2 semillas c/u) en paralelo, cada uno con su propia instancia de Gazebo.
-#   scripts/train_parte_a.sh [TOTAL_STEPS] [MAX_HOURS]
+#   scripts/parte_a_train.sh [TOTAL_STEPS] [MAX_HOURS]
 STEPS=${1:-150000}
 HOURS=${2:-3}
 REPO="$(cd "$(dirname "$0")/.." && pwd)"
