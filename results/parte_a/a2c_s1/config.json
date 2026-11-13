@@ -1,0 +1,18 @@
+{
+  "algo": "a2c",
+  "total_steps": 150000,
+  "max_hours": 3.0,
+  "seed": 1,
+  "out": "results/parte_a/a2c_s1",
+  "lr": 0.0003,
+  "reward_scale": 0.1,
+  "n_steps": null,
+  "hyper": {
+    "gamma": 0.99,
+    "lam": 1.0,
+    "n_steps": 32,
+    "vf_coef": 0.5,
+    "ent_coef": 0.001,
+    "max_grad": 0.5
+  }
+}

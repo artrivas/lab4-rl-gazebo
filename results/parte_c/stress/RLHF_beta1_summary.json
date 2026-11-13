@@ -1,0 +1,61 @@
+{
+  "label": "RLHF_beta1",
+  "actor": "results/parte_c/rlhf_beta1/actor_rlhf.pth",
+  "episodes": 10,
+  "results": {
+    "0.0": {
+      "success_rate": 0.6,
+      "collision_rate": 0.4,
+      "timeout_rate": 0.0,
+      "mean_abs_dw": 0.12126433830202688,
+      "outcomes": [
+        "goal",
+        "collision",
+        "goal",
+        "goal",
+        "collision",
+        "collision",
+        "goal",
+        "goal",
+        "collision",
+        "goal"
+      ]
+    },
+    "0.05": {
+      "success_rate": 0.5,
+      "collision_rate": 0.5,
+      "timeout_rate": 0.0,
+      "mean_abs_dw": 0.12900396892212568,
+      "outcomes": [
+        "collision",
+        "goal",
+        "collision",
+        "goal",
+        "goal",
+        "collision",
+        "collision",
+        "goal",
+        "collision",
+        "goal"
+      ]
+    },
+    "0.1": {
+      "success_rate": 0.8,
+      "collision_rate": 0.2,
+      "timeout_rate": 0.0,
+      "mean_abs_dw": 0.1272284566144311,
+      "outcomes": [
+        "collision",
+        "goal",
+        "goal",
+        "goal",
+        "goal",
+        "goal",
+        "goal",
+        "goal",
+        "collision",
+        "goal"
+      ]
+    }
+  }
+}

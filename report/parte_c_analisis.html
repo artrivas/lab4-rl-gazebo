@@ -1,0 +1,32 @@
+<p><b>Métricas de conducción</b> en la prueba de estrés (sin ruido / σ<sub>LiDAR</sub> = 0.1 m, promedios por paso sobre los 10 episodios):</p>
+<table><thead><tr><th>política</th><th>éxitos</th><th>t medio a la meta</th><th>ω² medio (rad²/s²)</th><th>|ω| medio</th><th>v media (m/s)</th></tr></thead><tbody>
+<tr><td>BC</td><td>0/10 · 0/10</td><td>–</td><td>0.05 · 0.05</td><td>0.17 · 0.19</td><td>0.195 · 0.207</td></tr>
+<tr><td>DAgger</td><td>9/10 · 6/10</td><td>24.7 s · 27.5 s</td><td>0.65 · 0.75</td><td>0.58 · 0.63</td><td>0.176 · 0.169</td></tr>
+<tr><td>RLHF β = 0</td><td>0/10 · 0/10</td><td>–</td><td>0.32 · 0.40</td><td>0.41 · 0.45</td><td><b>0.219 · 0.219</b></td></tr>
+<tr><td>RLHF β = 0.2</td><td>1/10 · 2/10</td><td>18.0 s · 16.4 s</td><td>0.15 · 0.12</td><td>0.30 · 0.27</td><td>0.217 · 0.216</td></tr>
+<tr><td><b>RLHF β = 1</b></td><td>6/10 · <b>8/10</b></td><td><b>15.1 s · 17.5 s</b></td><td><b>0.34 · 0.37</b></td><td>0.41 · 0.45</td><td>0.213 · 0.216</td></tr>
+</tbody></table>
+<h3>Análisis</h3>
+<ul>
+<li><b>Modelo de recompensa:</b> ℒ<sub>RM</sub> de entrenamiento cae a ~0 en ~20 épocas y la de validación alcanza su mínimo
+(≈ 0.09) cerca de la época 100 y luego sube levemente (sobreajuste con sólo 16 pares); la precisión de preferencia es 100 %
+en ambos conjuntos (4 pares de validación: evidencia débil). r<sub>ψ</sub> aprende sobre todo "avanzar recto y rápido
+sin girar es mejor", y sólo 5 de los 20 pares contienen un choque.</li>
+<li><b>β = 0 → reward hacking.</b> Sin la penalización KL, PPO maximiza r<sub>ψ</sub> sin restricciones: la recompensa
+aprendida por paso sube de ≈ 0.2 a ≈ 0.85 y la divergencia ln π<sub>θ</sub>/π<sub>DAgger</sub> crece sin control (≈ 2 nats/paso),
+mientras el éxito real cae de ~70 % a <b>0 %</b> (gráfica 6). La política explota el punto ciego del modelo: va siempre a
+v<sub>máx</sub> (0.219 m/s) y casi sin evadir, chocando en el 80–100 % de los episodios — "más recompensa aprendida" que
+no corresponde a la preferencia humana real.</li>
+<li><b>β = 0.2</b> frena parcialmente la deriva (KL ≈ 1.2–1.5) pero no lo suficiente: termina igualmente explotando r<sub>ψ</sub>
+(10–20 % de éxito), aunque es la más suave (ω² ≈ 0.13).</li>
+<li><b>β = 1 (regularización activa)</b> mantiene π<sub>θ</sub> cerca de la referencia (KL ≈ 0.3 nats/paso) y conserva la
+capacidad de DAgger de llegar a la meta, pero refinada en la dirección de las preferencias: <b>la mitad de ω²</b> que DAgger
+(0.34 vs 0.65), llega en <b>15 s en vez de 25 s</b> (DAgger orbita alrededor de la meta antes de entrar, gráfica 7) y es la
+política <b>más robusta con ruido fuerte</b> en el LiDAR (80 % de éxito con σ = 0.1 m vs 60 % de DAgger). A cambio pierde éxito
+nominal sin ruido (60 % vs 90 %). Con 10 episodios por celda la incertidumbre es de ±15 pp, por lo que las diferencias
+entre DAgger y β = 1 son indicativas, mientras que el colapso de β = 0 y β = 0.2 es claro.</li>
+<li><b>Conclusión:</b> el término −β ln(π<sub>θ</sub>/π<sub>DAgger</sub>) es lo que hace utilizable un modelo de recompensa
+entrenado con pocas preferencias: actúa como "ancla" a la política segura de DAgger e impide que el optimizador explote
+r<sub>ψ</sub>. Para mejorar el éxito nominal harían falta más pares (en especial con choques y cruces cercanos),
+preferencias reales de un humano y/o combinar r<sub>ψ</sub> con la recompensa del entorno.</li>
+</ul>

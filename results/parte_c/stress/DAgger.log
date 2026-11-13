@@ -1,0 +1,4 @@
+[INFO] [1794530622.404556469] [lab4_stress]: waiting for /scan, /odom and gazebo services ...
+[stress DAgger] noise=0.0: exito 90% choque 10% |dw| 0.12
+[stress DAgger] noise=0.05: exito 60% choque 40% |dw| 0.11
+[stress DAgger] noise=0.1: exito 60% choque 40% |dw| 0.12

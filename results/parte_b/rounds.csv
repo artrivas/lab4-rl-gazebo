@@ -1,0 +1,6 @@
+round,policy,dataset_size,intervention_rate,supervised_collision_rate,eval_success_rate,eval_collision_rate,eval_timeout_rate,new_pairs,minutes
+0,BC,2022,0.3543,0.1333,0.0,1.0,0.0,750,3.1
+1,DAgger-1,2772,0.1641,0.2,0.4667,0.5333,0.0,201,4.5
+2,DAgger-2,2973,0.047,0.0,0.7333,0.2667,0.0,57,5.9
+3,DAgger-3,3030,0.1106,0.1333,0.6,0.4,0.0,133,7.2
+4,DAgger-4,3163,0.2212,0.1333,0.6,0.4,0.0,379,9.1

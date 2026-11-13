@@ -1,0 +1,61 @@
+{
+  "label": "DAgger",
+  "actor": "results/parte_b/dagger_sim.pth",
+  "episodes": 10,
+  "results": {
+    "0.0": {
+      "success_rate": 0.9,
+      "collision_rate": 0.1,
+      "timeout_rate": 0.0,
+      "mean_abs_dw": 0.11673108705704557,
+      "outcomes": [
+        "goal",
+        "collision",
+        "goal",
+        "goal",
+        "goal",
+        "goal",
+        "goal",
+        "goal",
+        "goal",
+        "goal"
+      ]
+    },
+    "0.05": {
+      "success_rate": 0.6,
+      "collision_rate": 0.4,
+      "timeout_rate": 0.0,
+      "mean_abs_dw": 0.11380759983632963,
+      "outcomes": [
+        "collision",
+        "collision",
+        "goal",
+        "goal",
+        "goal",
+        "collision",
+        "goal",
+        "collision",
+        "goal",
+        "goal"
+      ]
+    },
+    "0.1": {
+      "success_rate": 0.6,
+      "collision_rate": 0.4,
+      "timeout_rate": 0.0,
+      "mean_abs_dw": 0.12215051002118534,
+      "outcomes": [
+        "goal",
+        "goal",
+        "goal",
+        "collision",
+        "collision",
+        "goal",
+        "goal",
+        "goal",
+        "collision",
+        "collision"
+      ]
+    }
+  }
+}

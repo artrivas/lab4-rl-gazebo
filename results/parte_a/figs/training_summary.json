@@ -1,0 +1,42 @@
+[
+  {
+    "run": "a2c_s0",
+    "episodes": 2555,
+    "steps": 149942,
+    "ret_last50": -4.681199999999999,
+    "ret_last50_std": 105.09429806036101,
+    "success_last50": 0.38,
+    "collision_last50": 0.62,
+    "best_ma20": 87.80699999999999
+  },
+  {
+    "run": "a2c_s1",
+    "episodes": 2522,
+    "steps": 149991,
+    "ret_last50": 22.379080000000002,
+    "ret_last50_std": 109.15318176046726,
+    "success_last50": 0.5,
+    "collision_last50": 0.5,
+    "best_ma20": 122.67645000000002
+  },
+  {
+    "run": "ppo_s0",
+    "episodes": 634,
+    "steps": 149973,
+    "ret_last50": -15.392380000000001,
+    "ret_last50_std": 33.25654347757145,
+    "success_last50": 0.0,
+    "collision_last50": 0.16,
+    "best_ma20": -1.4126499999999997
+  },
+  {
+    "run": "ppo_s1",
+    "episodes": 633,
+    "steps": 149766,
+    "ret_last50": -15.074639999999999,
+    "ret_last50_std": 31.727453107213,
+    "success_last50": 0.0,
+    "collision_last50": 0.12,
+    "best_ma20": -4.50485
+  }
+]

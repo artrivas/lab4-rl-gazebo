@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!--
+  Lab 4 - Mundo basado en turtlebot3_dqn_stage3 (4 cilindros moviles orbitando el origen).
+  Cambios respecto al original:
+    * real_time_update_rate parametrizable (@RTU@): 0 = lo mas rapido posible (entrenamiento),
+      1000 = tiempo real (video / evaluacion visual).
+    * plugin gazebo_ros_state -> servicio /set_entity_state para reubicar el robot en cada reset.
+-->
+<sdf version="1.6">
+  <world name="default">
+    <include><uri>model://ground_plane</uri></include>
+    <include><uri>model://sun</uri></include>
+    <scene><shadows>false</shadows></scene>
+
+    <gui fullscreen='0'>
+      <camera name='user_camera'>
+        <pose frame=''>0.0 0.0 8.5 0 1.5707 0</pose>
+        <view_controller>orbit</view_controller>
+        <projection_type>perspective</projection_type>
+      </camera>
+    </gui>
+
+    <plugin name="gazebo_ros_state" filename="libgazebo_ros_state.so">
+      <ros><namespace>/</namespace></ros>
+      <update_rate>20.0</update_rate>
+    </plugin>
+
+    <physics type="ode">
+      <real_time_update_rate>@RTU@</real_time_update_rate>
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1</real_time_factor>
+      <ode>
+        <solver>
+          <type>quick</type>
+          <iters>150</iters>
+          <precon_iters>0</precon_iters>
+          <sor>1.400000</sor>
+          <use_dynamic_moi_rescaling>1</use_dynamic_moi_rescaling>
+        </solver>
+        <constraints>
+          <cfm>0.00001</cfm>
+          <erp>0.2</erp>
+          <contact_max_correcting_vel>2000.000000</contact_max_correcting_vel>
+          <contact_surface_layer>0.01000</contact_surface_layer>
+        </constraints>
+      </ode>
+    </physics>
+
+    <model name="turtlebot3_dqn_world">
+      <static>1</static>
+      <include><uri>model://turtlebot3_dqn_world</uri></include>
+    </model>
+
+    <model name="turtlebot3_dqn_obstacles">
+      <plugin name="obstacles" filename="libobstacles.so"/>
+      <allow_auto_disable>1</allow_auto_disable>
+      <include><uri>model://turtlebot3_dqn_world/obstacles</uri></include>
+    </model>
+  </world>
+</sdf>

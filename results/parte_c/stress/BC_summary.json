@@ -1,0 +1,61 @@
+{
+  "label": "BC",
+  "actor": "results/parte_b/bc.pth",
+  "episodes": 10,
+  "results": {
+    "0.0": {
+      "success_rate": 0.0,
+      "collision_rate": 1.0,
+      "timeout_rate": 0.0,
+      "mean_abs_dw": 0.025274562327032558,
+      "outcomes": [
+        "collision",
+        "collision",
+        "collision",
+        "collision",
+        "collision",
+        "collision",
+        "collision",
+        "collision",
+        "collision",
+        "collision"
+      ]
+    },
+    "0.05": {
+      "success_rate": 0.1,
+      "collision_rate": 0.9,
+      "timeout_rate": 0.0,
+      "mean_abs_dw": 0.02400654768890401,
+      "outcomes": [
+        "collision",
+        "collision",
+        "goal",
+        "collision",
+        "collision",
+        "collision",
+        "collision",
+        "collision",
+        "collision",
+        "collision"
+      ]
+    },
+    "0.1": {
+      "success_rate": 0.0,
+      "collision_rate": 1.0,
+      "timeout_rate": 0.0,
+      "mean_abs_dw": 0.025130741276540774,
+      "outcomes": [
+        "collision",
+        "collision",
+        "collision",
+        "collision",
+        "collision",
+        "collision",
+        "collision",
+        "collision",
+        "collision",
+        "collision"
+      ]
+    }
+  }
+}

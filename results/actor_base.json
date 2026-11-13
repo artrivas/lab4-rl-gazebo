@@ -1,0 +1,11 @@
+{
+  "selected": "a2c_s1_best",
+  "source": "results/parte_a/a2c_s1/actor_best.pth",
+  "success_rate": 0.7,
+  "collision_rate": 0.3,
+  "mean_return": 73.42711061603909,
+  "best_per_algo": {
+    "a2c": "a2c_s1_best",
+    "ppo": "ppo_s1_best"
+  }
+}

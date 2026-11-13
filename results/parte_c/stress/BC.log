@@ -1,0 +1,4 @@
+[INFO] [1794530607.680630658] [lab4_stress]: waiting for /scan, /odom and gazebo services ...
+[stress BC] noise=0.0: exito 0% choque 100% |dw| 0.03
+[stress BC] noise=0.05: exito 10% choque 90% |dw| 0.02
+[stress BC] noise=0.1: exito 0% choque 100% |dw| 0.03

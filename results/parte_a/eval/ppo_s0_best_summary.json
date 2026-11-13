@@ -1,0 +1,40 @@
+{
+  "actor": "results/parte_a/ppo_s0/actor_best.pth",
+  "actor_meta": {
+    "algo": "ppo",
+    "episode": 612,
+    "global_step": 144926,
+    "ma20_return": -1.412601826826107,
+    "success_rate20": 0.0
+  },
+  "episodes": 20,
+  "deterministic": true,
+  "lidar_noise_std": 0.0,
+  "success_rate": 0.0,
+  "collision_rate": 0.05,
+  "timeout_rate": 0.95,
+  "mean_return": -1.6739599674051502,
+  "mean_time_to_goal_s": null,
+  "outcomes": [
+    "timeout",
+    "timeout",
+    "timeout",
+    "timeout",
+    "timeout",
+    "timeout",
+    "timeout",
+    "timeout",
+    "timeout",
+    "timeout",
+    "timeout",
+    "timeout",
+    "timeout",
+    "timeout",
+    "timeout",
+    "timeout",
+    "timeout",
+    "timeout",
+    "timeout",
+    "collision"
+  ]
+}

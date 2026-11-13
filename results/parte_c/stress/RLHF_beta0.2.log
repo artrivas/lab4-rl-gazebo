@@ -1,0 +1,4 @@
+[INFO] [1794530654.601876111] [lab4_stress]: waiting for /scan, /odom and gazebo services ...
+[stress RLHF_beta0.2] noise=0.0: exito 10% choque 90% |dw| 0.11
+[stress RLHF_beta0.2] noise=0.05: exito 20% choque 80% |dw| 0.10
+[stress RLHF_beta0.2] noise=0.1: exito 20% choque 70% |dw| 0.11

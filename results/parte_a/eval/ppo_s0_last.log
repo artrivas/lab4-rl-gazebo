@@ -1,0 +1,22 @@
+[INFO] [1794526961.943511273] [lab4_eval]: waiting for /scan, /odom and gazebo services ...
+ep  1: timeout   return     4.6  t=50.0s
+ep  2: timeout   return     5.1  t=50.0s
+ep  3: collision return   -94.6  t=37.2s
+ep  4: timeout   return    -0.7  t=50.0s
+ep  5: collision return   -88.7  t=37.8s
+ep  6: timeout   return    -1.0  t=50.0s
+ep  7: timeout   return     3.4  t=50.0s
+ep  8: timeout   return     2.8  t=50.0s
+ep  9: timeout   return     3.6  t=50.0s
+ep 10: collision return   -97.9  t=37.8s
+ep 11: timeout   return    -1.0  t=50.0s
+ep 12: collision return  -123.6  t=31.8s
+ep 13: timeout   return    -4.3  t=50.0s
+ep 14: collision return   -90.1  t=45.2s
+ep 15: timeout   return     6.6  t=50.0s
+ep 16: collision return   -87.5  t=38.4s
+ep 17: timeout   return     2.8  t=50.0s
+ep 18: collision return   -85.7  t=40.6s
+ep 19: collision return   -93.9  t=39.4s
+ep 20: collision return   -88.9  t=39.0s
+{"success_rate": 0.0, "collision_rate": 0.45, "timeout_rate": 0.55, "mean_return": -41.44279562606953}

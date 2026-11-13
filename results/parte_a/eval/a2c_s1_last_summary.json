@@ -1,0 +1,38 @@
+{
+  "actor": "results/parte_a/a2c_s1/actor_last.pth",
+  "actor_meta": {
+    "algo": "a2c",
+    "episode": 2522,
+    "global_step": 150000
+  },
+  "episodes": 20,
+  "deterministic": true,
+  "lidar_noise_std": 0.0,
+  "success_rate": 0.65,
+  "collision_rate": 0.35,
+  "timeout_rate": 0.0,
+  "mean_return": 61.242300609164275,
+  "mean_time_to_goal_s": 13.169846153846155,
+  "outcomes": [
+    "collision",
+    "goal",
+    "collision",
+    "collision",
+    "goal",
+    "goal",
+    "goal",
+    "goal",
+    "goal",
+    "collision",
+    "collision",
+    "goal",
+    "goal",
+    "goal",
+    "goal",
+    "collision",
+    "goal",
+    "goal",
+    "goal",
+    "collision"
+  ]
+}

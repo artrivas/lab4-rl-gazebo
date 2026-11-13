@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+results/**/*_gazebo.log
+results/**/checkpoint_last.pt
+results/smoke*
+results/check*
+results/dbg*
+results/test_expert*
+results/gzclient_*.log
+results/demo*
+results/parte_c_v1_descartado/
+report/informe_lab4.html

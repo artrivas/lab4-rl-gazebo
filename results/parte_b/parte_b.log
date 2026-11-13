@@ -1,0 +1,39 @@
+[INFO] [1794527640.139123955] [lab4_parte_b]: waiting for /scan, /odom and gazebo services ...
+[D0] ep 1/30 goal |D|=68
+[D0] ep 2/30 goal |D|=138
+[D0] ep 3/30 goal |D|=206
+[D0] ep 4/30 goal |D|=271
+[D0] ep 5/30 goal |D|=335
+[D0] ep 6/30 goal |D|=401
+[D0] ep 7/30 goal |D|=463
+[D0] ep 8/30 goal |D|=540
+[D0] ep 9/30 goal |D|=608
+[D0] ep 10/30 goal |D|=689
+[D0] ep 11/30 goal |D|=756
+[D0] ep 12/30 goal |D|=843
+[D0] ep 13/30 goal |D|=911
+[D0] ep 14/30 goal |D|=979
+[D0] ep 15/30 goal |D|=1045
+[D0] ep 16/30 goal |D|=1108
+[D0] ep 17/30 goal |D|=1176
+[D0] ep 18/30 goal |D|=1245
+[D0] ep 19/30 goal |D|=1312
+[D0] ep 20/30 goal |D|=1379
+[D0] ep 21/30 goal |D|=1456
+[D0] ep 22/30 goal |D|=1523
+[D0] ep 23/30 collision |D|=1566
+[D0] ep 24/30 goal |D|=1636
+[D0] ep 25/30 goal |D|=1701
+[D0] ep 26/30 goal |D|=1758
+[D0] ep 27/30 goal |D|=1826
+[D0] ep 28/30 goal |D|=1894
+[D0] ep 29/30 goal |D|=1961
+[D0] ep 30/30 goal |D|=2022
+[D0] exito experto 0.97
+[BC] train mse 0.0068 val mse 0.0054
+[BC] {"round": 0, "policy": "BC", "dataset_size": 2022, "intervention_rate": 0.3543, "supervised_collision_rate": 0.1333, "eval_success_rate": 0.0, "eval_collision_rate": 1.0, "eval_timeout_rate": 0.0, "new_pairs": 750, "minutes": 3.1}
+[DAgger-1] {"round": 1, "policy": "DAgger-1", "dataset_size": 2772, "intervention_rate": 0.1641, "supervised_collision_rate": 0.2, "eval_success_rate": 0.4667, "eval_collision_rate": 0.5333, "eval_timeout_rate": 0.0, "new_pairs": 201, "minutes": 4.5}
+[DAgger-2] {"round": 2, "policy": "DAgger-2", "dataset_size": 2973, "intervention_rate": 0.047, "supervised_collision_rate": 0.0, "eval_success_rate": 0.7333, "eval_collision_rate": 0.2667, "eval_timeout_rate": 0.0, "new_pairs": 57, "minutes": 5.9}
+[DAgger-3] {"round": 3, "policy": "DAgger-3", "dataset_size": 3030, "intervention_rate": 0.1106, "supervised_collision_rate": 0.1333, "eval_success_rate": 0.6, "eval_collision_rate": 0.4, "eval_timeout_rate": 0.0, "new_pairs": 133, "minutes": 7.2}
+[DAgger-4] {"round": 4, "policy": "DAgger-4", "dataset_size": 3163, "intervention_rate": 0.2212, "supervised_collision_rate": 0.1333, "eval_success_rate": 0.6, "eval_collision_rate": 0.4, "eval_timeout_rate": 0.0, "new_pairs": 379, "minutes": 9.1}
+[parte_b] done in 9.1 min
